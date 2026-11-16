@@ -216,7 +216,7 @@
           </div>
         </details>
 
-        <FeedbackBar v-if="showFeedback" :lang="lang" @close="showFeedback = false" />
+        <FeedbackBar :lang="lang" :file-name="fileName" />
       </template>
 
       <p v-if="errorMessage" class="rounded-lg bg-rose-50 p-3 text-sm text-rose-700" role="alert">
@@ -250,7 +250,6 @@ const openingInput = ref('');
 const requiresOpeningBalance = ref(false);
 const errorMessage = ref('');
 const isDragging = ref(false);
-const showFeedback = ref(true);
 const showRecurring = ref(false);
 const scenarioState = ref([]);
 let fileReadVersion = 0;
@@ -309,7 +308,6 @@ function loadCsvText(csvText, name) {
     errorMessage.value = '';
     resetScenarios();
     showRecurring.value = false;
-    showFeedback.value = true;
   } catch (error) {
     errorMessage.value = error instanceof Error ? error.message : t.value.fileError;
   }
